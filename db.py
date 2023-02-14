@@ -20,9 +20,11 @@
 
 from requests_html import HTMLSession
 from bs4 import BeautifulSoup
+import sqlite3
 
 url = "https://www.jessops.com/drones?fh_start_index=21&fh_view_size=21"
 r = HTMLSession()
+
 
 page = r.get(url)
 soup = BeautifulSoup(page.content, "html.parser")
@@ -32,4 +34,3 @@ for item in items:
     name = item.find("h4").find("a").text
     url = "https://www.jessops.com" + str(item.find("h4").find("a")["href"])
     price = item.find("p", {"class": "price larger"}).text.strip().replace("£", "")
-    print(price)
