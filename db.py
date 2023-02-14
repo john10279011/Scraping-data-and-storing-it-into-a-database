@@ -26,6 +26,12 @@ url = "https://www.jessops.com/drones?fh_start_index=21&fh_view_size=21"
 r = HTMLSession()
 
 
+conn = sqlite3.connect("jessop.db")
+c = conn.cursor()
+
+c.execute("""CREATE TABLE drones(name TEXT,link TEXT, price INT)""")
+
+
 page = r.get(url)
 soup = BeautifulSoup(page.content, "html.parser")
 
