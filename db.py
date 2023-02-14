@@ -21,8 +21,13 @@ for item in items:
     url = "https://www.jessops.com" + str(item.find("h4").find("a")["href"])
     price = item.find("p", {"class": "price larger"}).text.strip().replace("£", "")
     c.execute("""INSERT INTO drones VALUES(?,?,?)""", (name, url, price))
-    c.commit()
+    conn.commit()
 
+
+c.execute("""SELECT * FROM drones""")
+results = c.fetchall()
+print(results)
+conn.close()
 
 # import sqlite3
 
